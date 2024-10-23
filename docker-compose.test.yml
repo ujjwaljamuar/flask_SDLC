@@ -1,0 +1,14 @@
+version: '3'
+services:
+  flask_app:
+    build: .
+    ports:
+      - "5000:5000"
+  integration_test:
+    image: python:3.10
+    depends_on:
+      - flask_app
+    volumes:
+      - ./tests:/tests
+    working_dir: /tests
+    command: python test_integration.py
